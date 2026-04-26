@@ -100,10 +100,7 @@ def process(
                 refined = claude.refine_draft(anthropic_key, title, draft_text)
 
                 p.update(task, description=f'    Saving "{title}" to Notion...')
-                existing = notion.find_improved_by_original_url(
-                    notion_client, improved_db, original_url
-                )
-                if existing and force:
+                if existing:
                     notion.update_improved_page(
                         notion_client, existing["id"], title, refined
                     )
