@@ -1,0 +1,16 @@
+services:
+  - type: cron
+    name: stackgenie
+    runtime: python
+    schedule: "0 * * * *"  # every hour
+    buildCommand: pip install uv && uv sync --frozen
+    startCommand: uv run stackgenie
+    envVars:
+      - key: NOTION_API_KEY
+        sync: false
+      - key: NOTION_DRAFTS_DB_ID
+        sync: false
+      - key: NOTION_IMPROVED_DB_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
